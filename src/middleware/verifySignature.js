@@ -9,5 +9,7 @@ function verifySignature(req, res, next) {
     return res.status(401).send('Invalid signature');
   }
   next();
+
+  print('Signature verified successfully');
 }
 
