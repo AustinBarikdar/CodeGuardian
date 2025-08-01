@@ -13,6 +13,7 @@ function verifySignature(req, res, next) {
   next();
 
   print('Signature verified successfully');
+  print('Request body:', req.rawBody);
 }
 
 module.exports = {verifySignature};
