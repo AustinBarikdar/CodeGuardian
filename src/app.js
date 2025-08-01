@@ -14,9 +14,6 @@ app.use(bodyParser.json({
   }
 }));
 
-// Middleware to verify GitHub webhook signature
-
-
 // Webhook route
 app.post('/webhook', verifySignature, (req, res) => {ç
   console.log('Received GitHub webhook:');
