@@ -1,3 +1,5 @@
+const GITHUB_SECRET = process.env.GITHUB_WEBHOOK_SECRET;
+
 function verifySignature(req, res, next) {
   const signature = req.headers['x-hub-signature-256'];
   if (!signature) {
@@ -13,3 +15,4 @@ function verifySignature(req, res, next) {
   print('Signature verified successfully');
 }
 
+module.exports = {verifySignature};
