@@ -1,4 +1,7 @@
+
 const GITHUB_SECRET = process.env.GITHUB_WEBHOOK_SECRET;
+require('dotenv').config();
+const crypto = require('crypto');
 
 function verifySignature(req, res, next) {
   const signature = req.headers['x-hub-signature-256'];
