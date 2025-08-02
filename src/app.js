@@ -17,7 +17,6 @@ app.use(bodyParser.json({
 // Webhook route
 app.post('/webhook', verifySignature, (req, res) => {ç
   console.log('Event:', req.headers['x-github-event']);
-  console.log('Payload:', req.body);
 
   // TODO: Add PR handling logic here later
 

@@ -7,16 +7,12 @@ function verifySignature(req, res, next) {
   if (!signature) {
     return res.status(401).send('No signature found');
   }
-  console.log('GITHUB_SECRET:', GITHUB_SECRET);
   const hmac = crypto.createHmac('sha256', GITHUB_SECRET);
   const digest = 'sha256=' + hmac.update(req.rawBody).digest('hex');
   if (signature !== digest) {
     return res.status(401).send('Invalid signature');
   }
-
- console.log('Signature verified successfully');
- console.log('Request body:', req.rawBody);
-
+  
   next();
 }
 
