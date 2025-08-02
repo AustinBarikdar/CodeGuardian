@@ -1,6 +1,5 @@
-
-const GITHUB_SECRET = process.env.GITHUB_WEBHOOK_SECRET;
 require('dotenv').config();
+const GITHUB_SECRET = process.env.GITHUB_WEBHOOK_SECRET;
 const crypto = require('crypto');
 
 function verifySignature(req, res, next) {
@@ -8,15 +7,17 @@ function verifySignature(req, res, next) {
   if (!signature) {
     return res.status(401).send('No signature found');
   }
+  console.log('GITHUB_SECRET:', GITHUB_SECRET);
   const hmac = crypto.createHmac('sha256', GITHUB_SECRET);
   const digest = 'sha256=' + hmac.update(req.rawBody).digest('hex');
   if (signature !== digest) {
     return res.status(401).send('Invalid signature');
   }
-  next();
 
-  print('Signature verified successfully');
-  print('Request body:', req.rawBody);
+ console.log('Signature verified successfully');
+ console.log('Request body:', req.rawBody);
+
+  next();
 }
 
 module.exports = {verifySignature};
