@@ -7,7 +7,7 @@ if (!process.env.OPENAI_API_KEY) {
 }
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // Add to .env
+  apiKey: process.env.OPENAI_API_KEY, 
 });
 
 /**
