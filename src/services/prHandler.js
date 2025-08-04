@@ -17,7 +17,7 @@ export async function handlePullRequestEvent(payload) {
 
   const file = filesChanged[0];
   const patch = file.patch;
-  const reviewText = getReviewFromAI(patch); 
+  const reviewText = await getReviewFromAI(patch); 
 
   await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
     owner: repo.owner.login,
