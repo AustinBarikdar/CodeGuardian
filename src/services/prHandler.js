@@ -1,6 +1,6 @@
 import { getInstallationOctokit } from '../services/githubService.js';
 import { getReviewFromAI } from '../services/aiService.js';
- // Assuming you have an AI service to generate reviews
+
 export async function handlePullRequestEvent(payload) {
   const installationId = payload.installation.id;
   const pr = payload.pull_request;
