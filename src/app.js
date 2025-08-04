@@ -18,7 +18,12 @@ app.use(bodyParser.json({
 
 // Webhook route
 app.post('/webhook', verifySignature, (req, res) => {
-  console.log('Event:', req.headers['x-github-event']);
+  
+  if (req.body.action === 'opened' || req.body.action === 'synchronize') {
+    console.log('Handling pull request event...');
+  } else {
+    return res.status(200).send('Event ignored');
+  }
 
   // TODO: Add PR handling logic here later
   handlePullRequestEvent(req.body) 
