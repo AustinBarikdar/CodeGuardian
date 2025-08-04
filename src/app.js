@@ -1,11 +1,13 @@
-require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
+import dotenv from "dotenv";
+dotenv.config();
+import express from 'express';
+import bodyParser from 'body-parser';
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const {verifySignature} = require('./middleware/verifySignature');
+import { verifySignature } from './middleware/verifySignature.js';
+import { handlePullRequestEvent } from './services/prHandler.js';
 
 // Middleware to parse JSON body with raw buffer for signature verification
 app.use(bodyParser.json({
@@ -14,12 +16,15 @@ app.use(bodyParser.json({
   }
 }));
 
+
+
 // Webhook route
 app.post('/webhook', verifySignature, (req, res) => {
   console.log('Event:', req.headers['x-github-event']);
   console.log('Payload:', req.body);
 
   // TODO: Add PR handling logic here later
+  handlePullRequestEvent(req.body) 
 
   res.status(200).send('Webhook received');
 });
