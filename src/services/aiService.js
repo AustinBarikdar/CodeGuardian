@@ -1,6 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
 import { OpenAI } from "openai";
+// Ensure the OpenAI API key is set in the environment variables
+if (!process.env.GITHUB_APP_ID || !process.env.GITHUB_PRIVATE_KEY_PATH) {
+  throw new Error("The GITHUB_APP_ID or GITHUB_PRIVATE_KEY_PATH environment variable is missing or empty; please provide them in your environment or .env file.");
+}
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("The OPENAI_API_KEY environment variable is missing or empty; please provide it in your environment or .env file.");

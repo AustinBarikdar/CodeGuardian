@@ -1,5 +1,9 @@
 import { getInstallationOctokit } from '../services/githubService.js';
 import { getReviewFromAI } from '../services/aiService.js';
+// Ensure the necessary environment variables are set
+if (!process.env.GITHUB_APP_ID || !process.env.GITHUB_PRIVATE_KEY_PATH) {
+  throw new Error("The GITHUB_APP_ID or GITHUB_PRIVATE_KEY_PATH environment variable is missing or empty; please provide them in your environment or .env file.");
+}
 
 export async function handlePullRequestEvent(payload) {
   const installationId = payload.installation.id;
